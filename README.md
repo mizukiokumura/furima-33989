@@ -11,9 +11,8 @@
 | jp_last_name        | string  | null: false              |
 | jp_kana_first_name  | string  | null: false              |
 | jp_kana_last_name   | string  | null: false              |
-| user_year           | integer | null: false              |
-| user_month          | integer | null: false              |
-| user_day            | integer | null: false              |
+| Birthday            | date    | null: false              |
+
 
 ### Association
 
@@ -24,12 +23,12 @@
 
 | Column                        | Type          | Option               |
 | ----------------------------- | ------------- | -------------------- |
-| item_name                     | string        | null: false          |
+| name                          | string        | null: false          |
 | item_description              | text          | null: false          |
 | user                          | references    | foreign_key: true    |
-| item_price                    | integer       | null: false          |
+| price                         | integer       | null: false          |
 | category_id                   | integer       | null: false          |
-| item_state                    | integer       | null: false          |
+| state_id                      | integer       | null: false          |
 | delivery_fee_burden_id        | integer       | null: false          |
 | shipment_source_prefecture_id | integer       | null: false          |
 | days_to_ship_id               | integer       | null: false          |
@@ -53,7 +52,7 @@
 
 
 ### Association
-- belongs_to :purchase_histories
+- belongs_to :purchase_history
 
 
 ## purchase_historiesテーブル
