@@ -12,10 +12,6 @@
 | jp_last_name          | string  | null: false   |
 | jp_kana_first_name    | string  | null: false   |
 | jp_kana_last_name     | string  | null: false   |
-| year                  | integer | null: false   |
-| month                 | integer | null: false   |
-| day                   | integer | null: false   |
-
 
 ### Association
 
@@ -24,15 +20,13 @@
 
 ## itemsテーブル
 
-| Column           | Type          | Option                   |
-| ---------------- | ------------- | ------------------------ |
-| image            | ActiveStorage | validates presence: true |
-| item_name        | text          | null: false              |
-| item_description | text          | null: false              |
-| user_id          | references    | foreign_key: true        |
-| category         | string        | null: false              |
-| item_state       | string        | null: false              |
-| item_price       | integer       | null: false              |
+| Column           | Type          | Option               |
+| ---------------- | ------------- | -------------------- |
+| item_name        | string        | null: false          |
+| item_description | text          | null: false          |
+| user             | references    | foreign_key: true    |
+| item_state       | string        | null: false          |
+| item_price       | integer       | null: false          |
 
 
 ### Association
@@ -42,19 +36,19 @@
 
 ## street_addressテーブル
 
-| Column        | Type     | Option        |
-| ------------- | -------- | ------------- |
-| Prefectures   | string   | null: false   |
-| postal_code   | integer  | null: false   |
-| municipality  | string   | null: false   |
-| address       | string   | null: false   |
-| building_name | string   |               |
-| phone_number  | integer  | null: false   |
+| Column          | Type     | Option        |
+| --------------- | -------- | ------------- |
+| Prefecture_id   | integer  | null: false   |
+| postal_code     | string   | null: false   |
+| municipality    | string   | null: false   |
+| address         | string   | null: false   |
+| building_name   | string   |               |
+| phone_number    | string   | null: false   |
 
 
 
 ### Association
-belongs_to :items
+- belongs_to :purchase_histories
 
 
 
@@ -62,8 +56,8 @@ belongs_to :items
 
 | Column      | Type         | Option            |
 | ----------- | ------------ | ----------------- |
-| user_id     | references   | foreign_key: true |
-| item_id     | references   | foreign_key: true |
+| user        | references   | foreign_key: true |
+| item        | references   | foreign_key: true |
 
 
 
