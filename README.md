@@ -11,7 +11,7 @@
 | jp_last_name        | string  | null: false              |
 | jp_kana_first_name  | string  | null: false              |
 | jp_kana_last_name   | string  | null: false              |
-| Birthday            | date    | null: false              |
+| birthday            | date    | null: false              |
 
 
 ### Association
