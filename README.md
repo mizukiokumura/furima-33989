@@ -2,32 +2,34 @@
 
 ## usersテーブル
 
-| Column                | Type    | Options       |
-| --------------------- | ------- | ------------- |
-| nickname              | string  | null: false   |
-| email                 | string  | null: false   |
-| password              | string  | null: false   |
-| password_confirmation | string  | null: false   |
-| jp_first_name         | string  | null: false   |
-| jp_last_name          | string  | null: false   |
-| jp_kana_first_name    | string  | null: false   |
-| jp_kana_last_name     | string  | null: false   |
+| Column              | Type    | Options                  |
+| ------------------- | ------- | ------------------------ |
+| nickname            | string  | null: false              |
+| email               | string  | null: false, unique:true |
+| encrypted_password  | string  | null: false              |
+| jp_first_name       | string  | null: false              |
+| jp_last_name        | string  | null: false              |
+| jp_kana_first_name  | string  | null: false              |
+| jp_kana_last_name   | string  | null: false              |
 
 ### Association
 
 - has_many :items
-- has_one :purchase_history
+- has_many :purchase_histories
 
 ## itemsテーブル
 
-| Column           | Type          | Option               |
-| ---------------- | ------------- | -------------------- |
-| item_name        | string        | null: false          |
-| item_description | text          | null: false          |
-| user             | references    | foreign_key: true    |
-| item_state       | string        | null: false          |
-| item_price       | integer       | null: false          |
-
+| Column                        | Type          | Option               |
+| ----------------------------- | ------------- | -------------------- |
+| item_name                     | string        | null: false          |
+| item_description              | text          | null: false          |
+| user                          | references    | foreign_key: true    |
+| item_state                    | string        | null: false          |
+| item_price                    | integer       | null: false          |
+| category_id                   | integer       | null: false          |
+| delivery_fee_burden_id        | integer       | null: false          |
+| shipment_source_prefecture_id | integer       | null: false          |
+| days_to_ship_id               | integer       | null: false          |
 
 ### Association
 
@@ -49,7 +51,7 @@
 
 ### Association
 - belongs_to :purchase_histories
-
+- belongs_to :street_address
 
 
 ## purchase_historiesテーブル
@@ -65,3 +67,4 @@
 
 - belongs_to :item
 - belongs_to :user
+- belongs_to :street_address
