@@ -48,16 +48,30 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Days to ship must be other than 1")
       end
       it '商品の値段が記入されていないと出品できない事' do
-        @item.price = 0
+        @item.price = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price can't be blank")
+      end
+      it '商品の値段が３００円未満だと出品できない' do
+        @item.price = 299
         @item.valid?
         expect(@item.errors.full_messages).to include("Price must be greater than 300")
+      end
+      it '商品の値段が９９９９９９９円を超えると出品できない' do
+        @item.price = 99999999
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price must be less than 9999999")
+      end
+      it '商品の値段が全角だと出品できない' do
+        @item.price = '３３３３'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
       end
       it '商品の画像が記入されていないと出品できない事' do
         @item.image = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
-
     end
   end
 end

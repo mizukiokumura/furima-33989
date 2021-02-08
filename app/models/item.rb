@@ -12,11 +12,13 @@ class Item < ApplicationRecord
     validates :item_description
     validates :user
     validates :price,                         numericality: {only_integer:true, greater_than:300, less_than:9999999 }
-    validates :category_id,                   numericality: {other_than: 1 }
-    validates :state_id,                      numericality: {other_than: 1 }
-    validates :delivery_fee_burden_id,        numericality: {other_than: 1 }
-    validates :shipment_source_prefecture_id, numericality: {other_than: 1 }
-    validates :days_to_ship_id,               numericality: {other_than: 1 }
     validates :image
+    with_options numericality: {other_than: 1} do
+      validates :category_id                  
+      validates :state_id                     
+      validates :delivery_fee_burden_id        
+      validates :shipment_source_prefecture_id 
+      validates :days_to_ship_id               
+    end
   end
 end
