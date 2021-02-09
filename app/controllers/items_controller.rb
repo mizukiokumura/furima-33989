@@ -43,12 +43,7 @@ class ItemsController < ApplicationController
   end
 
   def move_to_show
-    @item = Item.find(params[:id])
-    item = @item.user.id
-    user = current_user.id
-    unless user != item
-      render :edit
-    else
+    unless current_user.id == @item.user.id
       redirect_to root_path
     end
   end
