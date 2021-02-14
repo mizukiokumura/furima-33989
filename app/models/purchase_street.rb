@@ -4,9 +4,13 @@ class PurchaseStreet
   attr_accessor :prefecture_id, :postal_code, :municipality, :address, :building_name, :phone_number, :user_id, :item_id, :token
 
   with_options presence: true do
+    validates :user_id
+    validates :item_id
     validates :postal_code,   format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
-    validates :municipality,  format: {with: /\A[ぁ-んァ-ン一-龥々]/, message: 'is invalid. Input full-width characters.'}
-    validates :address,       format: {with: /\A[ぁ-んァ-ン一-龥々]/, message: 'is invalid, Input full-width characters'}
+    with_options format: {with: /\A[ぁ-んァ-ン一-龥々]/, message: 'is invalid. Input full-width characters.'} do
+      validates :municipality  
+      validates :address       
+    end
     validates :phone_number,  format: {with: /\A\d{11}\z/, message: "is invalid. Input half-width characters."}
     validates :prefecture_id,   numericality: { other_than: 1 }
     validates :token

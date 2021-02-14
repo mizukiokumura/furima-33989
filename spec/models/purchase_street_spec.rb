@@ -10,6 +10,10 @@ RSpec.describe PurchaseStreet, type: :model do
     it '全ての情報が入力されていると保存できること' do
       expect(@street).to be_valid
     end
+    it 'building_nameが無くても登録できること' do
+      @street.building_name = ''
+      expect(@street).to be_valid
+    end
   end
   context '住所が保存できない時' do
     it 'prefecture_idが1だと保存できないこと' do
@@ -50,7 +54,7 @@ RSpec.describe PurchaseStreet, type: :model do
     it 'addressが全角じゃないと保存できないこと' do
       @street.address = 'hogehuga'
       @street.valid?
-      expect(@street.errors.full_messages).to include("Address is invalid, Input full-width characters")
+      expect(@street.errors.full_messages).to include("Address is invalid. Input full-width characters.")
     end
     it 'building_nameはなくても保存できること' do
       @street.building_name = ''
@@ -80,6 +84,16 @@ RSpec.describe PurchaseStreet, type: :model do
       @street.token = ''
       @street.valid?
       expect(@street.errors.full_messages).to include("Token can't be blank")
+    end
+    it 'user_idが空だと保存できない事' do
+      @street.user_id = nil
+      @street.valid?
+      expect(@street.errors.full_messages).to include("User can't be blank")
+    end
+    it 'item_idが空だと保存できないこと' do
+      @street.item_id = nil
+      @street.valid?
+      expect(@street.errors.full_messages).to include("Item can't be blank")
     end
   end
 end

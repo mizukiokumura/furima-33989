@@ -1,8 +1,7 @@
 class PurchaseHistriesController < ApplicationController
-  before_action :authenticate_user!, only: :index
+  before_action :authenticate_user!, only: [:index, :create]
   before_action :show_item,          only: [:index, :create]
   before_action :sold_out,           only: :index
-  before_action :seller_exit,         only: :index
   def index
     @purchase_street = PurchaseStreet.new
   end
@@ -38,13 +37,7 @@ class PurchaseHistriesController < ApplicationController
   end
 
   def sold_out
-    if @item.purchase_history.present?
-      redirect_to root_path
-    end
-  end
-
-  def seller_exit
-    if @item.user.id == current_user.id
+    if @item.purchase_history.present? || @item.user.id == current_user.id
       redirect_to root_path
     end
   end
