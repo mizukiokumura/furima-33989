@@ -1,7 +1,7 @@
 class PurchaseHistriesController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :show_item,          only: [:index, :create]
-  before_action :sold_out,           only: :index
+  before_action :sold_out,           only: [:index, :create]
   def index
     @purchase_street = PurchaseStreet.new
   end
