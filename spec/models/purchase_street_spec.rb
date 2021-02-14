@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe PurchaseStreet, type: :model do
   before do
-    @street = FactoryBot.build(:purchase_street)
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.create(:item)
+    @street = FactoryBot.build(:purchase_street, user_id: @user.id, item_id: @item.id)
+    sleep(1)
   end
 
 
@@ -55,10 +58,6 @@ RSpec.describe PurchaseStreet, type: :model do
       @street.address = 'hogehuga'
       @street.valid?
       expect(@street.errors.full_messages).to include("Address is invalid. Input full-width characters.")
-    end
-    it 'building_nameはなくても保存できること' do
-      @street.building_name = ''
-      expect(@street).to be_valid
     end
     it 'phone_numberが無いと保存できないこと' do
       @street.phone_number = ''
